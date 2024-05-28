@@ -7,6 +7,8 @@ editor: visual
 
 # Task 1
 
+We will first make the data vectors. 
+
 ``` {r task1}
 preTreatmentBP <- c(130, 128, 116, 124, 133, 134, 118, 126, 114, 127, 141, 138, 128, 140, 137, 131, 120, 128, 139, 135)
 postTreatmentBP <- c(114, 98, 113, 99, 107, 116, 113, 111, 119, 117, 101, 119, 130, 122, 106, 106, 124, 102, 117, 113)
@@ -39,7 +41,7 @@ mean(Positive_BP_Difference)
 ## Making Data Frame
 
 ``` {r}
-df <- data.frame(patient = 1:20, pre_bp = preTreatmentBP, post_bp = postTreatmentBP, diff_bp = BP_Difference)
+df <- data.frame(patient = paste("Subject", 1:20, sep = "_"), pre_bp = preTreatmentBP, post_bp = postTreatmentBP, diff_bp = BP_Difference)
 ```
 
 ## Returning rows where BP increased in patients
@@ -62,9 +64,11 @@ knitr::kable(df)
 
 # Task 3
 
+We will first make the new data frame and add the indicator column into it.
+
 ``` {r}
 # Making new data frame
-placebo_df <- data.frame(patient = 1:10, pre_bp = c(138, 135, 147, 117, 152, 134, 114, 121, 131, 130), post_bp = c(105, 136, 123, 130, 134, 143, 135, 139, 120, 124))
+placebo_df <- data.frame(patient = paste("Subject", 1:10, sep = "_"), pre_bp = c(138, 135, 147, 117, 152, 134, 114, 121, 131, 130), post_bp = c(105, 136, 123, 130, 134, 143, 135, 139, 120, 124))
 # Adding difference_bp column
 placebo_df$diff_bp <- placebo_df$pre_bp - placebo_df$post_bp
 # Adding the indicator column
@@ -91,6 +95,8 @@ my_list[[2]]$pre_bp
 ```
 
 # Task 4
+
+We will first create the new status column.
 
 ``` {r}
 my_list[[1]]$status <- character(20)
@@ -130,6 +136,8 @@ my_list[[2]]
 ```
 
 # Task 5
+
+We will create a function that calculates the given statistic for the treatment and placebo groups the user gives in a list.
 
 ``` {r}
 statistic_calculation <- function(data_frame_list, stat = "mean") {

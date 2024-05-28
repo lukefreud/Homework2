@@ -142,6 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="task-1" class="level1">
 <h1>Task 1</h1>
+<p>We will first make the data vectors.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>preTreatmentBP <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">130</span>, <span class="dv">128</span>, <span class="dv">116</span>, <span class="dv">124</span>, <span class="dv">133</span>, <span class="dv">134</span>, <span class="dv">118</span>, <span class="dv">126</span>, <span class="dv">114</span>, <span class="dv">127</span>, <span class="dv">141</span>, <span class="dv">138</span>, <span class="dv">128</span>, <span class="dv">140</span>, <span class="dv">137</span>, <span class="dv">131</span>, <span class="dv">120</span>, <span class="dv">128</span>, <span class="dv">139</span>, <span class="dv">135</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>postTreatmentBP <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">114</span>, <span class="dv">98</span>, <span class="dv">113</span>, <span class="dv">99</span>, <span class="dv">107</span>, <span class="dv">116</span>, <span class="dv">113</span>, <span class="dv">111</span>, <span class="dv">119</span>, <span class="dv">117</span>, <span class="dv">101</span>, <span class="dv">119</span>, <span class="dv">130</span>, <span class="dv">122</span>, <span class="dv">106</span>, <span class="dv">106</span>, <span class="dv">124</span>, <span class="dv">102</span>, <span class="dv">117</span>, <span class="dv">113</span>)</span>
@@ -188,7 +189,7 @@ Subject_18 Subject_19 Subject_20
 <section id="making-data-frame" class="level2">
 <h2 class="anchored" data-anchor-id="making-data-frame">Making Data Frame</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">patient =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">pre_bp =</span> preTreatmentBP, <span class="at">post_bp =</span> postTreatmentBP, <span class="at">diff_bp =</span> BP_Difference)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">patient =</span> <span class="fu">paste</span>(<span class="st">"Subject"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">sep =</span> <span class="st">"_"</span>), <span class="at">pre_bp =</span> preTreatmentBP, <span class="at">post_bp =</span> postTreatmentBP, <span class="at">diff_bp =</span> BP_Difference)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="returning-rows-where-bp-increased-in-patients" class="level2">
@@ -196,10 +197,10 @@ Subject_18 Subject_19 Subject_20
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>diff_bp<span class="sc">&lt;</span><span class="dv">0</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           patient pre_bp post_bp diff_bp
-Subject_9        9    114     119      -5
-Subject_13      13    128     130      -2
-Subject_17      17    120     124      -4</code></pre>
+<pre><code>              patient pre_bp post_bp diff_bp
+Subject_9   Subject_9    114     119      -5
+Subject_13 Subject_13    128     130      -2
+Subject_17 Subject_17    120     124      -4</code></pre>
 </div>
 </div>
 </section>
@@ -218,7 +219,7 @@ Subject_17      17    120     124      -4</code></pre>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
-<th style="text-align: right;">patient</th>
+<th style="text-align: left;">patient</th>
 <th style="text-align: right;">pre_bp</th>
 <th style="text-align: right;">post_bp</th>
 <th style="text-align: right;">diff_bp</th>
@@ -228,7 +229,7 @@ Subject_17      17    120     124      -4</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Subject_1</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">Subject_1</td>
 <td style="text-align: right;">130</td>
 <td style="text-align: right;">114</td>
 <td style="text-align: right;">16</td>
@@ -236,7 +237,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Subject_2</td>
-<td style="text-align: right;">2</td>
+<td style="text-align: left;">Subject_2</td>
 <td style="text-align: right;">128</td>
 <td style="text-align: right;">98</td>
 <td style="text-align: right;">30</td>
@@ -244,7 +245,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Subject_3</td>
-<td style="text-align: right;">3</td>
+<td style="text-align: left;">Subject_3</td>
 <td style="text-align: right;">116</td>
 <td style="text-align: right;">113</td>
 <td style="text-align: right;">3</td>
@@ -252,7 +253,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Subject_4</td>
-<td style="text-align: right;">4</td>
+<td style="text-align: left;">Subject_4</td>
 <td style="text-align: right;">124</td>
 <td style="text-align: right;">99</td>
 <td style="text-align: right;">25</td>
@@ -260,7 +261,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Subject_5</td>
-<td style="text-align: right;">5</td>
+<td style="text-align: left;">Subject_5</td>
 <td style="text-align: right;">133</td>
 <td style="text-align: right;">107</td>
 <td style="text-align: right;">26</td>
@@ -268,7 +269,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Subject_6</td>
-<td style="text-align: right;">6</td>
+<td style="text-align: left;">Subject_6</td>
 <td style="text-align: right;">134</td>
 <td style="text-align: right;">116</td>
 <td style="text-align: right;">18</td>
@@ -276,7 +277,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Subject_7</td>
-<td style="text-align: right;">7</td>
+<td style="text-align: left;">Subject_7</td>
 <td style="text-align: right;">118</td>
 <td style="text-align: right;">113</td>
 <td style="text-align: right;">5</td>
@@ -284,7 +285,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Subject_8</td>
-<td style="text-align: right;">8</td>
+<td style="text-align: left;">Subject_8</td>
 <td style="text-align: right;">126</td>
 <td style="text-align: right;">111</td>
 <td style="text-align: right;">15</td>
@@ -292,7 +293,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Subject_9</td>
-<td style="text-align: right;">9</td>
+<td style="text-align: left;">Subject_9</td>
 <td style="text-align: right;">114</td>
 <td style="text-align: right;">119</td>
 <td style="text-align: right;">-5</td>
@@ -300,7 +301,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Subject_10</td>
-<td style="text-align: right;">10</td>
+<td style="text-align: left;">Subject_10</td>
 <td style="text-align: right;">127</td>
 <td style="text-align: right;">117</td>
 <td style="text-align: right;">10</td>
@@ -308,7 +309,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Subject_11</td>
-<td style="text-align: right;">11</td>
+<td style="text-align: left;">Subject_11</td>
 <td style="text-align: right;">141</td>
 <td style="text-align: right;">101</td>
 <td style="text-align: right;">40</td>
@@ -316,7 +317,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Subject_12</td>
-<td style="text-align: right;">12</td>
+<td style="text-align: left;">Subject_12</td>
 <td style="text-align: right;">138</td>
 <td style="text-align: right;">119</td>
 <td style="text-align: right;">19</td>
@@ -324,7 +325,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Subject_13</td>
-<td style="text-align: right;">13</td>
+<td style="text-align: left;">Subject_13</td>
 <td style="text-align: right;">128</td>
 <td style="text-align: right;">130</td>
 <td style="text-align: right;">-2</td>
@@ -332,7 +333,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Subject_14</td>
-<td style="text-align: right;">14</td>
+<td style="text-align: left;">Subject_14</td>
 <td style="text-align: right;">140</td>
 <td style="text-align: right;">122</td>
 <td style="text-align: right;">18</td>
@@ -340,7 +341,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Subject_15</td>
-<td style="text-align: right;">15</td>
+<td style="text-align: left;">Subject_15</td>
 <td style="text-align: right;">137</td>
 <td style="text-align: right;">106</td>
 <td style="text-align: right;">31</td>
@@ -348,7 +349,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Subject_16</td>
-<td style="text-align: right;">16</td>
+<td style="text-align: left;">Subject_16</td>
 <td style="text-align: right;">131</td>
 <td style="text-align: right;">106</td>
 <td style="text-align: right;">25</td>
@@ -356,7 +357,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Subject_17</td>
-<td style="text-align: right;">17</td>
+<td style="text-align: left;">Subject_17</td>
 <td style="text-align: right;">120</td>
 <td style="text-align: right;">124</td>
 <td style="text-align: right;">-4</td>
@@ -364,7 +365,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Subject_18</td>
-<td style="text-align: right;">18</td>
+<td style="text-align: left;">Subject_18</td>
 <td style="text-align: right;">128</td>
 <td style="text-align: right;">102</td>
 <td style="text-align: right;">26</td>
@@ -372,7 +373,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Subject_19</td>
-<td style="text-align: right;">19</td>
+<td style="text-align: left;">Subject_19</td>
 <td style="text-align: right;">139</td>
 <td style="text-align: right;">117</td>
 <td style="text-align: right;">22</td>
@@ -380,7 +381,7 @@ Subject_17      17    120     124      -4</code></pre>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Subject_20</td>
-<td style="text-align: right;">20</td>
+<td style="text-align: left;">Subject_20</td>
 <td style="text-align: right;">135</td>
 <td style="text-align: right;">113</td>
 <td style="text-align: right;">22</td>
@@ -394,9 +395,10 @@ Subject_17      17    120     124      -4</code></pre>
 </section>
 <section id="task-3" class="level1">
 <h1>Task 3</h1>
+<p>We will first make the new data frame and add the indicator column into it.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Making new data frame</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>placebo_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">patient =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">pre_bp =</span> <span class="fu">c</span>(<span class="dv">138</span>, <span class="dv">135</span>, <span class="dv">147</span>, <span class="dv">117</span>, <span class="dv">152</span>, <span class="dv">134</span>, <span class="dv">114</span>, <span class="dv">121</span>, <span class="dv">131</span>, <span class="dv">130</span>), <span class="at">post_bp =</span> <span class="fu">c</span>(<span class="dv">105</span>, <span class="dv">136</span>, <span class="dv">123</span>, <span class="dv">130</span>, <span class="dv">134</span>, <span class="dv">143</span>, <span class="dv">135</span>, <span class="dv">139</span>, <span class="dv">120</span>, <span class="dv">124</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>placebo_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">patient =</span> <span class="fu">paste</span>(<span class="st">"Subject"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">sep =</span> <span class="st">"_"</span>), <span class="at">pre_bp =</span> <span class="fu">c</span>(<span class="dv">138</span>, <span class="dv">135</span>, <span class="dv">147</span>, <span class="dv">117</span>, <span class="dv">152</span>, <span class="dv">134</span>, <span class="dv">114</span>, <span class="dv">121</span>, <span class="dv">131</span>, <span class="dv">130</span>), <span class="at">post_bp =</span> <span class="fu">c</span>(<span class="dv">105</span>, <span class="dv">136</span>, <span class="dv">123</span>, <span class="dv">130</span>, <span class="dv">134</span>, <span class="dv">143</span>, <span class="dv">135</span>, <span class="dv">139</span>, <span class="dv">120</span>, <span class="dv">124</span>))</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding difference_bp column</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>placebo_df<span class="sc">$</span>diff_bp <span class="ot">&lt;-</span> placebo_df<span class="sc">$</span>pre_bp <span class="sc">-</span> placebo_df<span class="sc">$</span>post_bp</span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding the indicator column</span></span>
@@ -410,78 +412,78 @@ Subject_17      17    120     124      -4</code></pre>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># First way of accessing first df</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>my_list<span class="sc">$</span>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           patient pre_bp post_bp diff_bp indicator
-Subject_1        1    130     114      16      TRUE
-Subject_2        2    128      98      30      TRUE
-Subject_3        3    116     113       3      TRUE
-Subject_4        4    124      99      25      TRUE
-Subject_5        5    133     107      26      TRUE
-Subject_6        6    134     116      18      TRUE
-Subject_7        7    118     113       5      TRUE
-Subject_8        8    126     111      15      TRUE
-Subject_9        9    114     119      -5      TRUE
-Subject_10      10    127     117      10      TRUE
-Subject_11      11    141     101      40      TRUE
-Subject_12      12    138     119      19      TRUE
-Subject_13      13    128     130      -2     FALSE
-Subject_14      14    140     122      18     FALSE
-Subject_15      15    137     106      31      TRUE
-Subject_16      16    131     106      25      TRUE
-Subject_17      17    120     124      -4     FALSE
-Subject_18      18    128     102      26      TRUE
-Subject_19      19    139     117      22      TRUE
-Subject_20      20    135     113      22      TRUE</code></pre>
+<pre><code>              patient pre_bp post_bp diff_bp indicator
+Subject_1   Subject_1    130     114      16      TRUE
+Subject_2   Subject_2    128      98      30      TRUE
+Subject_3   Subject_3    116     113       3      TRUE
+Subject_4   Subject_4    124      99      25      TRUE
+Subject_5   Subject_5    133     107      26      TRUE
+Subject_6   Subject_6    134     116      18      TRUE
+Subject_7   Subject_7    118     113       5      TRUE
+Subject_8   Subject_8    126     111      15      TRUE
+Subject_9   Subject_9    114     119      -5      TRUE
+Subject_10 Subject_10    127     117      10      TRUE
+Subject_11 Subject_11    141     101      40      TRUE
+Subject_12 Subject_12    138     119      19      TRUE
+Subject_13 Subject_13    128     130      -2     FALSE
+Subject_14 Subject_14    140     122      18     FALSE
+Subject_15 Subject_15    137     106      31      TRUE
+Subject_16 Subject_16    131     106      25      TRUE
+Subject_17 Subject_17    120     124      -4     FALSE
+Subject_18 Subject_18    128     102      26      TRUE
+Subject_19 Subject_19    139     117      22      TRUE
+Subject_20 Subject_20    135     113      22      TRUE</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Second way of accessing first df</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>my_list[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           patient pre_bp post_bp diff_bp indicator
-Subject_1        1    130     114      16      TRUE
-Subject_2        2    128      98      30      TRUE
-Subject_3        3    116     113       3      TRUE
-Subject_4        4    124      99      25      TRUE
-Subject_5        5    133     107      26      TRUE
-Subject_6        6    134     116      18      TRUE
-Subject_7        7    118     113       5      TRUE
-Subject_8        8    126     111      15      TRUE
-Subject_9        9    114     119      -5      TRUE
-Subject_10      10    127     117      10      TRUE
-Subject_11      11    141     101      40      TRUE
-Subject_12      12    138     119      19      TRUE
-Subject_13      13    128     130      -2     FALSE
-Subject_14      14    140     122      18     FALSE
-Subject_15      15    137     106      31      TRUE
-Subject_16      16    131     106      25      TRUE
-Subject_17      17    120     124      -4     FALSE
-Subject_18      18    128     102      26      TRUE
-Subject_19      19    139     117      22      TRUE
-Subject_20      20    135     113      22      TRUE</code></pre>
+<pre><code>              patient pre_bp post_bp diff_bp indicator
+Subject_1   Subject_1    130     114      16      TRUE
+Subject_2   Subject_2    128      98      30      TRUE
+Subject_3   Subject_3    116     113       3      TRUE
+Subject_4   Subject_4    124      99      25      TRUE
+Subject_5   Subject_5    133     107      26      TRUE
+Subject_6   Subject_6    134     116      18      TRUE
+Subject_7   Subject_7    118     113       5      TRUE
+Subject_8   Subject_8    126     111      15      TRUE
+Subject_9   Subject_9    114     119      -5      TRUE
+Subject_10 Subject_10    127     117      10      TRUE
+Subject_11 Subject_11    141     101      40      TRUE
+Subject_12 Subject_12    138     119      19      TRUE
+Subject_13 Subject_13    128     130      -2     FALSE
+Subject_14 Subject_14    140     122      18     FALSE
+Subject_15 Subject_15    137     106      31      TRUE
+Subject_16 Subject_16    131     106      25      TRUE
+Subject_17 Subject_17    120     124      -4     FALSE
+Subject_18 Subject_18    128     102      26      TRUE
+Subject_19 Subject_19    139     117      22      TRUE
+Subject_20 Subject_20    135     113      22      TRUE</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Third way of accessing first df</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>my_list[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$df
-           patient pre_bp post_bp diff_bp indicator
-Subject_1        1    130     114      16      TRUE
-Subject_2        2    128      98      30      TRUE
-Subject_3        3    116     113       3      TRUE
-Subject_4        4    124      99      25      TRUE
-Subject_5        5    133     107      26      TRUE
-Subject_6        6    134     116      18      TRUE
-Subject_7        7    118     113       5      TRUE
-Subject_8        8    126     111      15      TRUE
-Subject_9        9    114     119      -5      TRUE
-Subject_10      10    127     117      10      TRUE
-Subject_11      11    141     101      40      TRUE
-Subject_12      12    138     119      19      TRUE
-Subject_13      13    128     130      -2     FALSE
-Subject_14      14    140     122      18     FALSE
-Subject_15      15    137     106      31      TRUE
-Subject_16      16    131     106      25      TRUE
-Subject_17      17    120     124      -4     FALSE
-Subject_18      18    128     102      26      TRUE
-Subject_19      19    139     117      22      TRUE
-Subject_20      20    135     113      22      TRUE</code></pre>
+              patient pre_bp post_bp diff_bp indicator
+Subject_1   Subject_1    130     114      16      TRUE
+Subject_2   Subject_2    128      98      30      TRUE
+Subject_3   Subject_3    116     113       3      TRUE
+Subject_4   Subject_4    124      99      25      TRUE
+Subject_5   Subject_5    133     107      26      TRUE
+Subject_6   Subject_6    134     116      18      TRUE
+Subject_7   Subject_7    118     113       5      TRUE
+Subject_8   Subject_8    126     111      15      TRUE
+Subject_9   Subject_9    114     119      -5      TRUE
+Subject_10 Subject_10    127     117      10      TRUE
+Subject_11 Subject_11    141     101      40      TRUE
+Subject_12 Subject_12    138     119      19      TRUE
+Subject_13 Subject_13    128     130      -2     FALSE
+Subject_14 Subject_14    140     122      18     FALSE
+Subject_15 Subject_15    137     106      31      TRUE
+Subject_16 Subject_16    131     106      25      TRUE
+Subject_17 Subject_17    120     124      -4     FALSE
+Subject_18 Subject_18    128     102      26      TRUE
+Subject_19 Subject_19    139     117      22      TRUE
+Subject_20 Subject_20    135     113      22      TRUE</code></pre>
 </div>
 </div>
 </section>
@@ -497,6 +499,7 @@ Subject_20      20    135     113      22      TRUE</code></pre>
 </section>
 <section id="task-4" class="level1">
 <h1>Task 4</h1>
+<p>We will first create the new status column.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>my_list[[<span class="dv">1</span>]]<span class="sc">$</span>status <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="dv">20</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>my_list[[<span class="dv">2</span>]]<span class="sc">$</span>status <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -516,27 +519,27 @@ Subject_20      20    135     113      22      TRUE</code></pre>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Showing new dataset</span></span>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>my_list[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           patient pre_bp post_bp diff_bp indicator     status
-Subject_1        1    130     114      16      TRUE    optimal
-Subject_2        2    128      98      30      TRUE    optimal
-Subject_3        3    116     113       3      TRUE    optimal
-Subject_4        4    124      99      25      TRUE    optimal
-Subject_5        5    133     107      26      TRUE    optimal
-Subject_6        6    134     116      18      TRUE    optimal
-Subject_7        7    118     113       5      TRUE    optimal
-Subject_8        8    126     111      15      TRUE    optimal
-Subject_9        9    114     119      -5      TRUE    optimal
-Subject_10      10    127     117      10      TRUE    optimal
-Subject_11      11    141     101      40      TRUE    optimal
-Subject_12      12    138     119      19      TRUE    optimal
-Subject_13      13    128     130      -2     FALSE borderline
-Subject_14      14    140     122      18     FALSE borderline
-Subject_15      15    137     106      31      TRUE    optimal
-Subject_16      16    131     106      25      TRUE    optimal
-Subject_17      17    120     124      -4     FALSE borderline
-Subject_18      18    128     102      26      TRUE    optimal
-Subject_19      19    139     117      22      TRUE    optimal
-Subject_20      20    135     113      22      TRUE    optimal</code></pre>
+<pre><code>              patient pre_bp post_bp diff_bp indicator     status
+Subject_1   Subject_1    130     114      16      TRUE    optimal
+Subject_2   Subject_2    128      98      30      TRUE    optimal
+Subject_3   Subject_3    116     113       3      TRUE    optimal
+Subject_4   Subject_4    124      99      25      TRUE    optimal
+Subject_5   Subject_5    133     107      26      TRUE    optimal
+Subject_6   Subject_6    134     116      18      TRUE    optimal
+Subject_7   Subject_7    118     113       5      TRUE    optimal
+Subject_8   Subject_8    126     111      15      TRUE    optimal
+Subject_9   Subject_9    114     119      -5      TRUE    optimal
+Subject_10 Subject_10    127     117      10      TRUE    optimal
+Subject_11 Subject_11    141     101      40      TRUE    optimal
+Subject_12 Subject_12    138     119      19      TRUE    optimal
+Subject_13 Subject_13    128     130      -2     FALSE borderline
+Subject_14 Subject_14    140     122      18     FALSE borderline
+Subject_15 Subject_15    137     106      31      TRUE    optimal
+Subject_16 Subject_16    131     106      25      TRUE    optimal
+Subject_17 Subject_17    120     124      -4     FALSE borderline
+Subject_18 Subject_18    128     102      26      TRUE    optimal
+Subject_19 Subject_19    139     117      22      TRUE    optimal
+Subject_20 Subject_20    135     113      22      TRUE    optimal</code></pre>
 </div>
 </div>
 </section>
@@ -555,23 +558,24 @@ Subject_20      20    135     113      22      TRUE    optimal</code></pre>
 <span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Showing new dataset</span></span>
 <span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>my_list[[<span class="dv">2</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   patient pre_bp post_bp diff_bp indicator     status
-1        1    138     105      33      TRUE    optimal
-2        2    135     136      -1     FALSE       high
-3        3    147     123      24     FALSE borderline
-4        4    117     130     -13     FALSE borderline
-5        5    152     134      18     FALSE       high
-6        6    134     143      -9     FALSE       high
-7        7    114     135     -21     FALSE       high
-8        8    121     139     -18     FALSE       high
-9        9    131     120      11     FALSE    optimal
-10      10    130     124       6     FALSE borderline</code></pre>
+<pre><code>      patient pre_bp post_bp diff_bp indicator     status
+1   Subject_1    138     105      33      TRUE    optimal
+2   Subject_2    135     136      -1     FALSE       high
+3   Subject_3    147     123      24     FALSE borderline
+4   Subject_4    117     130     -13     FALSE borderline
+5   Subject_5    152     134      18     FALSE       high
+6   Subject_6    134     143      -9     FALSE       high
+7   Subject_7    114     135     -21     FALSE       high
+8   Subject_8    121     139     -18     FALSE       high
+9   Subject_9    131     120      11     FALSE    optimal
+10 Subject_10    130     124       6     FALSE borderline</code></pre>
 </div>
 </div>
 </section>
 </section>
 <section id="task-5" class="level1">
 <h1>Task 5</h1>
+<p>We will create a function that calculates the given statistic for the treatment and placebo groups the user gives in a list.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>statistic_calculation <span class="ot">&lt;-</span> <span class="cf">function</span>(data_frame_list, <span class="at">stat =</span> <span class="st">"mean"</span>) {</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Obtaining statistic inputted by user</span></span>
@@ -590,9 +594,56 @@ Subject_20      20    135     113      22      TRUE    optimal</code></pre>
 <span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Creating a vector with all 6 statistics</span></span>
 <span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>  stat_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(treatment_pre_bp_stat, treatment_post_bp_stat, treatment_diff_bp_stat, placebo_pre_bp_stat, placebo_post_bp_stat, placebo_diff_bp_stat)</span>
 <span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Naming the vector</span></span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(stat_vector) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Pre-Treatment BP Statistic"</span>, <span class="st">"Post-Treatment BP Statistic"</span>, <span class="st">"Difference (Pre-Post) Treatment BP Statistic"</span>, <span class="st">"Pre-Placebo BP Statistic"</span>, <span class="st">"Post-Placebo BP Statistic"</span>, <span class="st">"Difference (Pre-Post) Placebo BP Statistic"</span>)</span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(stat_vector)</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>  names_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">"Pre-Treatment BP"</span>, stat, <span class="at">sep =</span> <span class="st">" "</span>), <span class="fu">paste</span>(<span class="st">"Post-Treatment BP"</span>, stat, <span class="at">sep =</span> <span class="st">" "</span>), <span class="fu">paste</span>(<span class="st">"Difference (Pre-Post) Treatment BP"</span>, stat, <span class="at">sep =</span> <span class="st">" "</span>), <span class="fu">paste</span>(<span class="st">"Pre-Placebo BP"</span>, stat, <span class="at">sep =</span> <span class="st">" "</span>), <span class="fu">paste</span>(<span class="st">"Post-Placebo BP"</span>, stat, <span class="at">sep =</span> <span class="st">" "</span>), <span class="fu">paste</span>( <span class="st">"Difference (Pre-Post) Placebo BP"</span>, stat, <span class="at">sep =</span> <span class="st">" "</span>))</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(stat_vector) <span class="ot">&lt;-</span> names_vector</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Returning the vector</span></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(stat_vector)</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a><span class="fu">statistic_calculation</span>(my_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  Pre-Treatment BP mean                  Post-Treatment BP mean 
+                                 129.35                                  112.35 
+Difference (Pre-Post) Treatment BP mean                     Pre-Placebo BP mean 
+                                  17.00                                  131.90 
+                   Post-Placebo BP mean   Difference (Pre-Post) Placebo BP mean 
+                                 128.90                                    3.00 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">statistic_calculation</span>(my_list, <span class="at">stat =</span> <span class="st">"var"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  Pre-Treatment BP var                  Post-Treatment BP var 
+                              64.55526                               74.76579 
+Difference (Pre-Post) Treatment BP var                     Pre-Placebo BP var 
+                             153.68421                              149.87778 
+                   Post-Placebo BP var   Difference (Pre-Post) Placebo BP var 
+                             124.98889                              341.33333 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">statistic_calculation</span>(my_list, <span class="at">stat =</span> <span class="st">"sd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  Pre-Treatment BP sd                  Post-Treatment BP sd 
+                             8.034629                              8.646721 
+Difference (Pre-Post) Treatment BP sd                     Pre-Placebo BP sd 
+                            12.396944                             12.242458 
+                   Post-Placebo BP sd   Difference (Pre-Post) Placebo BP sd 
+                            11.179843                             18.475209 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">statistic_calculation</span>(my_list, <span class="at">stat =</span> <span class="st">"min"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  Pre-Treatment BP min                  Post-Treatment BP min 
+                                   114                                     98 
+Difference (Pre-Post) Treatment BP min                     Pre-Placebo BP min 
+                                    -5                                    114 
+                   Post-Placebo BP min   Difference (Pre-Post) Placebo BP min 
+                                   105                                    -21 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">statistic_calculation</span>(my_list, <span class="at">stat =</span> <span class="st">"max"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  Pre-Treatment BP max                  Post-Treatment BP max 
+                                   141                                    130 
+Difference (Pre-Post) Treatment BP max                     Pre-Placebo BP max 
+                                    40                                    152 
+                   Post-Placebo BP max   Difference (Pre-Post) Placebo BP max 
+                                   143                                     33 </code></pre>
+</div>
 </div>
 
 

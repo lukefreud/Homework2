@@ -149,7 +149,14 @@ statistic_calculation <- function(data_frame_list, stat = "mean") {
   # Creating a vector with all 6 statistics
   stat_vector <- c(treatment_pre_bp_stat, treatment_post_bp_stat, treatment_diff_bp_stat, placebo_pre_bp_stat, placebo_post_bp_stat, placebo_diff_bp_stat)
   # Naming the vector
-  names(stat_vector) <- c("Pre-Treatment BP Statistic", "Post-Treatment BP Statistic", "Difference (Pre-Post) Treatment BP Statistic", "Pre-Placebo BP Statistic", "Post-Placebo BP Statistic", "Difference (Pre-Post) Placebo BP Statistic")
+  names_vector <- c(paste("Pre-Treatment BP", stat, sep = " "), paste("Post-Treatment BP", stat, sep = " "), paste("Difference (Pre-Post) Treatment BP", stat, sep = " "), paste("Pre-Placebo BP", stat, sep = " "), paste("Post-Placebo BP", stat, sep = " "), paste( "Difference (Pre-Post) Placebo BP", stat, sep = " "))
+  names(stat_vector) <- names_vector
+  # Returning the vector
   return(stat_vector)
 }
+statistic_calculation(my_list)
+statistic_calculation(my_list, stat = "var")
+statistic_calculation(my_list, stat = "sd")
+statistic_calculation(my_list, stat = "min")
+statistic_calculation(my_list, stat = "max")
 ```

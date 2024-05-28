@@ -1,0 +1,155 @@
+---
+title: "Programming in Base R"
+author: "Luke Freudenheim"
+format: html
+editor: visual
+---
+
+# Task 1
+
+``` {r task1}
+preTreatmentBP <- c(130, 128, 116, 124, 133, 134, 118, 126, 114, 127, 141, 138, 128, 140, 137, 131, 120, 128, 139, 135)
+postTreatmentBP <- c(114, 98, 113, 99, 107, 116, 113, 111, 119, 117, 101, 119, 130, 122, 106, 106, 124, 102, 117, 113)
+names(preTreatmentBP) <- names(postTreatmentBP) <- paste("Subject", 1:20, sep = "_")
+BP_Difference <- preTreatmentBP - postTreatmentBP
+```
+
+## Average Decrease in BP Across all Patients
+
+``` {r}
+mean(BP_Difference)
+```
+
+## Subjects Where Their BP Decreased
+
+``` {r}
+which(BP_Difference>0)
+## Making the subset
+Positive_BP_Difference <- BP_Difference[-c(9,13,17)]
+```
+
+## Average Decrease in BP from Subsetted Data
+
+``` {r}
+mean(Positive_BP_Difference)
+```
+
+# Task 2
+
+## Making Data Frame
+
+``` {r}
+df <- data.frame(patient = 1:20, pre_bp = preTreatmentBP, post_bp = postTreatmentBP, diff_bp = BP_Difference)
+```
+
+## Returning rows where BP increased in patients
+
+``` {r}
+df[df$diff_bp<0,]
+```
+
+## Adding new Column to DF
+
+``` {r}
+df$indicator <- ifelse(df$post_bp < 120, TRUE, FALSE)
+```
+
+## Final Dataset
+
+``` {r}
+knitr::kable(df)
+```
+
+# Task 3
+
+``` {r}
+# Making new data frame
+placebo_df <- data.frame(patient = 1:10, pre_bp = c(138, 135, 147, 117, 152, 134, 114, 121, 131, 130), post_bp = c(105, 136, 123, 130, 134, 143, 135, 139, 120, 124))
+# Adding difference_bp column
+placebo_df$diff_bp <- placebo_df$pre_bp - placebo_df$post_bp
+# Adding the indicator column
+placebo_df$indicator <- ifelse(placebo_df$post_bp < 120, TRUE, FALSE)
+```
+
+## Creating and Accessing the List
+
+``` {r}
+# Making list
+my_list <- list(df = df, placebo_df = placebo_df)
+# First way of accessing first df
+my_list$df
+# Second way of accessing first df
+my_list[[1]]
+# Third way of accessing first df
+my_list[1]
+```
+
+## Accessing Pre-BP Column of Placebo Dataset
+
+``` {r}
+my_list[[2]]$pre_bp
+```
+
+# Task 4
+
+``` {r}
+my_list[[1]]$status <- character(20)
+my_list[[2]]$status <- character(10)
+```
+
+## For Loop for non-Placebo Dataset
+
+``` {r}
+for (i in 1:20) {
+  if(my_list[[1]]$post_bp[i] > 130) {
+    my_list[[1]]$status[i] <- "high"
+}   else if(my_list[[1]]$post_bp[i] > 120) {
+      my_list[[1]]$status[i] <- "borderline"
+}   else {
+      my_list[[1]]$status[i] <- "optimal"
+}
+}
+# Showing new dataset
+my_list[[1]]
+```
+
+## For Loop for Placebo Dataset
+
+``` {r}
+for (i in 1:10) {
+  if(my_list[[2]]$post_bp[i] > 130) {
+    my_list[[2]]$status[i] <- "high"
+}   else if(my_list[[2]]$post_bp[i] > 120) {
+      my_list[[2]]$status[i] <- "borderline"
+}   else {
+      my_list[[2]]$status[i] <- "optimal"
+}
+}
+# Showing new dataset
+my_list[[2]]
+```
+
+# Task 5
+
+``` {r}
+statistic_calculation <- function(data_frame_list, stat = "mean") {
+  # Obtaining statistic inputted by user
+  my_fun <- get(stat)
+  # Splitting list into two separate data frames
+  treatment_df <- data_frame_list[[1]]
+  placebo_df <- data_frame_list[[2]]
+  # Calculating statistic for treatment df
+  treatment_pre_bp_stat <- my_fun(treatment_df[,"pre_bp"])
+  treatment_post_bp_stat <- my_fun(treatment_df[,"post_bp"])
+  treatment_diff_bp_stat <- my_fun(treatment_df[,"diff_bp"])
+  # Calculating statistic for placebo df
+  placebo_pre_bp_stat <- my_fun(placebo_df[,"pre_bp"])
+  placebo_post_bp_stat <- my_fun(placebo_df[,"post_bp"])
+  placebo_diff_bp_stat <- my_fun(placebo_df[,"diff_bp"])
+  # Creating a vector with all 6 statistics
+  stat_vector <- c(treatment_pre_bp_stat, treatment_post_bp_stat, treatment_diff_bp_stat, placebo_pre_bp_stat, placebo_post_bp_stat, placebo_diff_bp_stat)
+  # Naming the vector
+  names(stat_vector) <- c("Pre-Treatment BP Statistic", "Post-Treatment BP Statistic", "Difference (Pre-Post) Treatment BP Statistic", "Pre-Placebo BP Statistic", "Post-Placebo BP Statistic", "Difference (Pre-Post) Placebo BP Statistic")
+  return(stat_vector)
+}
+```
